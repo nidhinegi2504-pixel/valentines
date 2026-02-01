@@ -69,30 +69,13 @@
       50% { opacity: 1; }
       100% { transform: translateY(-10vh); opacity: 0; }
     }
-
-    /* Play overlay */
-    #playOverlay {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(135deg, #ff4d6d, #ff758f);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 999;
-    }
   </style>
 </head>
 
 <body>
 
-  <!-- AUDIO -->
-  <audio id="bgm" loop>
-    <source src="yellow.mp3" type="audio/mpeg">
-  </audio>
-
   <!-- MAIN CARD -->
-  <div class="card" id="mainCard">
+  <div class="card" id="card">
     <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif">
 
     <h1>yoooo adityaaa 😎</h1>
@@ -105,39 +88,13 @@
     <button id="no">Nope 😅</button>
   </div>
 
-  <!-- PLAY OVERLAY -->
-  <div id="playOverlay">
-    <h1>One last thing 😌🎶</h1>
-    <p>Tap to start the music</p>
-    <button onclick="startMusic()">▶ Play Music</button>
-  </div>
-
   <script>
     const yesBtn = document.getElementById("yes");
     const noBtn = document.getElementById("no");
-    const card = document.getElementById("mainCard");
-    const overlay = document.getElementById("playOverlay");
-    const music = document.getElementById("bgm");
+    const card = document.getElementById("card");
 
-    // YES CLICK
+    // YES → SHOW SUCCESS + MUSIC PLAYER
     yesBtn.addEventListener("click", () => {
-      overlay.style.display = "flex";
-    });
-
-    // NO RUNS AWAY
-    noBtn.addEventListener("mouseenter", () => {
-      const maxX = card.clientWidth - noBtn.offsetWidth;
-      const maxY = card.clientHeight - noBtn.offsetHeight;
-      noBtn.style.left = Math.random() * maxX + "px";
-      noBtn.style.top = Math.random() * maxY + "px";
-    });
-
-    // START MUSIC + FINAL SCREEN
-    function startMusic() {
-      music.volume = 1;
-      music.currentTime = 0;
-      music.play();
-
       document.body.innerHTML = `
         <div style="
           height:100vh;
@@ -153,14 +110,29 @@
         ">
           <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
                style="width:300px;border-radius:20px;margin-bottom:20px;">
+
           <h1>CONGRATULATIONS 🎉💛</h1>
           <p style="font-size:18px;">
             You have signed up for the lifetime subscription,<br>
             enoyy! ❤️😌
           </p>
+
+          <audio controls loop style="margin-top:20px;">
+            <source src="yellow.mp3" type="audio/mpeg">
+            Your browser does not support audio.
+          </audio>
         </div>
       `;
-    }
+    });
+
+    // NO BUTTON RUNS AWAY
+    noBtn.addEventListener("mouseenter", () => {
+      const maxX = card.clientWidth - noBtn.offsetWidth;
+      const maxY = card.clientHeight - noBtn.offsetHeight;
+
+      noBtn.style.left = Math.random() * maxX + "px";
+      noBtn.style.top = Math.random() * maxY + "px";
+    });
 
     // FLOATING HEARTS
     setInterval(() => {
@@ -170,7 +142,7 @@
       heart.style.left = Math.random() * 100 + "vw";
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 6000);
-    }, 600);
+    }, 700);
   </script>
 
 </body>
