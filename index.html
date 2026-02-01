@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Valentine Mode Activated 😎💛</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     body {
@@ -26,8 +26,8 @@
       width: 340px;
       position: relative;
       box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-      animation: pop 0.6s ease;
       z-index: 5;
+      animation: pop 0.6s ease;
     }
 
     @keyframes pop {
@@ -58,7 +58,7 @@
       font-size: 16px;
       margin: 10px;
       position: relative;
-      z-index: 10; /* IMPORTANT */
+      z-index: 10; /* VERY IMPORTANT */
     }
 
     #yes {
@@ -72,12 +72,12 @@
       position: absolute;
     }
 
-    /* floating hearts */
+    /* Floating hearts */
     .heart {
       position: absolute;
       font-size: 22px;
       animation: float 6s linear infinite;
-      pointer-events: none; /* FIXES BUTTON CLICKS */
+      pointer-events: none; /* FIXES CLICK ISSUES */
     }
 
     @keyframes float {
@@ -96,7 +96,8 @@
   </audio>
 
   <div class="card">
-    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+    <!-- GitHub-safe GIF -->
+    <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" />
 
     <h1>yoooo adityaaa 😎</h1>
 
@@ -113,7 +114,11 @@
     const music = document.getElementById("bgm");
 
     function sayYes() {
-      music.play();
+      music.volume = 1;
+      music.currentTime = 0;
+      music.play().catch(() => {
+        console.log("Tap again to allow music");
+      });
 
       document.body.innerHTML = `
         <div style="
@@ -128,7 +133,7 @@
           text-align:center;
           padding:20px;">
 
-          <img src="https://media.giphy.com/media/3oz8xsaLjLVqVXr3tS/giphy.gif"
+          <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
                style="width:300px;border-radius:20px;margin-bottom:20px;">
 
           <h1>CONGRATULATIONS 🎉💛</h1>
@@ -152,7 +157,7 @@
       noBtn.style.top = Math.random() * maxY + "px";
     }
 
-    // floating hearts generator
+    // Floating hearts generator
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
